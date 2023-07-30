@@ -31,7 +31,7 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 
 # Copy files to repository git
 mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-cp "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+cp -rf "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 
 # Change temporary dir using subshell
 (
