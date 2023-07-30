@@ -18,4 +18,4 @@ RUN apk update \
     && make \
     && mv ./bin/gh /usr/local/bin/ \
     && rm -rf /tmp/${GH_FOLDER} \
-    && apk del packages
+    && apk del build-base
