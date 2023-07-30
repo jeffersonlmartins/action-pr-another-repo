@@ -5,7 +5,7 @@ Copy a folder to another repository and create a pull request
 ## Propose
 This repository was created to bypass dependencies from golang and speed up the workflow.
 
-Dockerfile-base - Created to bypass the download of dependencies during the workflow - this images is using in Dockerfile - jeffersonlmartins/github-cli:1.0
+Dockerfile-base - Created to bypass the download of dependencies during the workflow - this images is using in Dockerfile - it was maintained in docker hub: jeffersonlmartins/github-cli:base-1.0
 
 Dockerfile - Created to copy entrypoint and create PR like the propose of workflow.
 
