@@ -30,7 +30,6 @@ git config --global user.name "$INPUT_USER_NAME"
 git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$CLONE_DIR"
 
 # Copy files to repository git
-mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cp -rf "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 
 cd "$CLONE_DIR"
