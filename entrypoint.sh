@@ -33,26 +33,24 @@ git clone "https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git" "$C
 mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cp -rf "$INPUT_SOURCE_FOLDER" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 
-# Change temporary dir using subshell
-(
-  cd "$CLONE_DIR"
-  git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
+cd "$CLONE_DIR"
+git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
 
-  git add .
+git add .
 
-  if git status | grep -q "Changes to be committed"; then
-    git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-    
-    # Push git commit
-    git push -u origin HEAD:"$INPUT_DESTINATION_HEAD_BRANCH"
-    
-    # Create PR
-    gh pr create -t "$INPUT_DESTINATION_HEAD_BRANCH" \
-                 -b "$INPUT_DESTINATION_HEAD_BRANCH" \
-                 -B "$INPUT_DESTINATION_BASE_BRANCH" \
-                 -H "$INPUT_DESTINATION_HEAD_BRANCH" \
-                 $PULL_REQUEST_REVIEWERS
-  else
-    echo "No changes detected!"
-  fi
-)
+if git status | grep -q "Changes to be committed"; then
+git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+
+# Push git commit
+git push -u origin HEAD:"$INPUT_DESTINATION_HEAD_BRANCH"
+
+# Create PR
+gh pr create -t "$INPUT_DESTINATION_HEAD_BRANCH" \
+                -b "$INPUT_DESTINATION_HEAD_BRANCH" \
+                -B "$INPUT_DESTINATION_BASE_BRANCH" \
+                -H "$INPUT_DESTINATION_HEAD_BRANCH" \
+                $PULL_REQUEST_REVIEWERS
+else
+echo "No changes detected!"
+fi
+
