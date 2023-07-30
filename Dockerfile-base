@@ -1,0 +1,21 @@
+FROM golang:1.20-alpine3.18 AS builder
+
+LABEL maintainer="Jefferson L. Martins"
+LABEL version="1.0"
+LABEL description="Image Docker to GitHub CLI (gh)"
+
+ENV URL_GH https://github.com/cli/cli.git
+ENV GH_FOLDER gh-cli
+
+# Atualiza os repositórios e instala as dependências
+WORKDIR /tmp
+
+RUN apk update \
+    && apk add --no-cache --virtual packages \
+    build-base git \
+    && git clone ${URL_GH} ${GH_FOLDER} \
+    && cd ${GH_FOLDER} \
+    && make \
+    && mv ./bin/gh /usr/local/bin/ \
+    && rm -rf /tmp/${GH_FOLDER} \
+    && apk del packages
